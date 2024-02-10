@@ -1,0 +1,20 @@
+# Python
+*.pyc
+__pycache__/
+venv/
+*.env
+
+# IDEs and editors
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Dependency directories
+env/
+lib/
+bin/
+
+#Models
+output/ckpt/LibriTTS/800000.pth.tar
+hifigan/generator_universal.pth.tar
