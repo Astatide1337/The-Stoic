@@ -17,4 +17,3 @@ bin/
 
 #Models
 output/ckpt/LibriTTS/800000.pth.tar
-hifigan/generator_universal.pth.tar
