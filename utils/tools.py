@@ -7,6 +7,7 @@ import numpy as np
 import matplotlib
 from scipy.io import wavfile
 from matplotlib import pyplot as plt
+import soundfile as sf
 
 
 matplotlib.use("Agg")
@@ -210,7 +211,14 @@ def synth_samples(targets, predictions, vocoder, model_config, preprocess_config
         basename = basename.replace(" ", "")
         #remove all punctuation
         basename = ''.join(e for e in basename if e.isalnum())
-        wavfile.write((f"./GeneratedTTS/{basename}.wav"), sampling_rate, wav)
+        wav = wav / max(abs(wav))
+        sf.write(
+            os.path.join("./GeneratedTTS/", "{}.wav".format(basename)),
+            wav,
+            sampling_rate,
+            subtype='PCM_16'
+        )
+        #wavfile.write((f"./GeneratedTTS/{basename}.wav"), sampling_rate, wav)
 
 
 def plot_mel(data, stats, titles):

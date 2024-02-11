@@ -1,6 +1,8 @@
 import os
 import json
 import random
+from scipy.io import wavfile
+import noisereduce as nr
 # python synthesize.py --text "his mother, however, was a little shy of the company for him, and besides she could not always spare him."  --speaker_id 207 --restore_step 800000 --mode single -p config/LibriTTS/preprocess.yaml -m config/LibriTTS/model.yaml -t config/LibriTTS/train.yaml
 def generateAudio():
     with open("./quotes.json", "r", encoding="utf-8") as f:
@@ -32,4 +34,9 @@ def generateAudio():
         attribute = random.choice(attributes)
 
     prompt = f"{starter}{attribute} {quoteText}"
-    os.system(f'python synthesize.py --text "{prompt}" --speaker_id 0 --restore_step 900000 --mode single -p config/LibriTTS/preprocess.yaml -m config/LibriTTS/model.yaml -t config/LibriTTS/train.yaml --energy_control 0.6 --pitch_control 0.66')
+    os.system(f'python synthesize.py --text "{prompt}" --speaker_id 15 --restore_step 900000 --mode single -p config/LibriTTS/preprocess.yaml -m config/LibriTTS/model.yaml -t config/LibriTTS/train.yaml --energy_control 0.6 --pitch_control 0.66')
+    #get the most recent file in the directory
+    # title = max(os.listdir("./GeneratedTTS"), key=lambda x: os.path.getctime(os.path.join("./GeneratedTTS", x)))
+    # rate, data = wavfile.read(f"./GeneratedTTS/{title}")
+    # reduced_noise = nr.reduce_noise(y=data, sr=rate)    
+    # wavfile.write(f"./GeneratedTTS/{title}", rate, reduced_noise)#find better denoising method

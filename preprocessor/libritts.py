@@ -4,7 +4,7 @@ import librosa
 import numpy as np
 from scipy.io import wavfile
 from tqdm import tqdm
-
+import soundfile as sf
 from text import _clean_text
 
 
@@ -32,11 +32,12 @@ def prepare_align(config):
 
                 os.makedirs(os.path.join(out_dir, speaker), exist_ok=True)
                 wav, _ = librosa.load(wav_path, sampling_rate)
-                wav = wav / max(abs(wav)) * max_wav_value
-                wavfile.write(
+                wav = wav / max(abs(wav))
+                sf.write(
                     os.path.join(out_dir, speaker, "{}.wav".format(base_name)),
+                    wav,
                     sampling_rate,
-                    wav.astype(np.int16),
+                    subtype='PCM_16'
                 )
                 with open(
                     os.path.join(out_dir, speaker, "{}.lab".format(base_name)),
