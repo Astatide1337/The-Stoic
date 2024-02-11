@@ -17,3 +17,6 @@ bin/
 
 #Models
 output/ckpt/LibriTTS/800000.pth.tar
+
+#Videos
+/Videos
