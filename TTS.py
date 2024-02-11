@@ -34,9 +34,8 @@ def generateAudio():
         attribute = random.choice(attributes)
 
     prompt = f"{starter}{attribute} {quoteText}"
-    os.system(f'python synthesize.py --text "{prompt}" --speaker_id 15 --restore_step 900000 --mode single -p config/LibriTTS/preprocess.yaml -m config/LibriTTS/model.yaml -t config/LibriTTS/train.yaml --energy_control 0.6 --pitch_control 0.66')
-    #get the most recent file in the directory
+    os.system(f'python synthesize.py --text "{prompt}" --speaker_id 742 --restore_step 900000 --mode single -p config/LibriTTS/preprocess.yaml -m config/LibriTTS/model.yaml -t config/LibriTTS/train.yaml --energy_control 0.6 --pitch_control 0.66')
     # title = max(os.listdir("./GeneratedTTS"), key=lambda x: os.path.getctime(os.path.join("./GeneratedTTS", x)))
     # rate, data = wavfile.read(f"./GeneratedTTS/{title}")
     # reduced_noise = nr.reduce_noise(y=data, sr=rate)    
-    # wavfile.write(f"./GeneratedTTS/{title}", rate, reduced_noise)#find better denoising method
+    # wavfile.write(f"./GeneratedTTS/{title}", rate, reduced_noise)
